@@ -2,14 +2,12 @@ require 'spec_helper'
 
 describe "StaticPages" do
 
-  let(:base_title) { "Chitter" }
+  subject { page }
 
   describe "Home page" do
+    before { visit root_path }
 
-    it "should have the right title" do
-      visit '/static_pages/home'
-      expect(page).to have_title("#{base_title} | Home")
-    end
+    it { should have_title(full_title('')) }
   end
 
 end
