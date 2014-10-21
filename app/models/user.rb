@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
-  before_save { self.email = email.downcase }
-  before_create :create_remember_token
+  attr_accessor :remember_token,
+
+  before_save :downcase_email
+  before_create :create_remember_token,
   has_secure_password
   
   validates :name, presence: true, length: { maximum: 50 }
@@ -21,6 +23,9 @@ class User < ActiveRecord::Base
   end
 
   private
+    def downcase_email
+      self.email = email.downcase
+    end
 
     def create_remember_token
       self.remember_token = User.digest(User.new_remember_token)
