@@ -10,6 +10,8 @@ describe "Authentication" do
 
     it { should have_content('Sign in') }
     it { should have_title('Sign in') }
+    it { should_not have_link('Profile') }
+    it { should_not have_link('Settings') }
   end
 
   describe "signin" do
@@ -29,7 +31,7 @@ describe "Authentication" do
 
     describe "with valid information" do
       let(:user) { FactoryGirl.create(:user) }
-      before { sign_in user }
+      before { sign_in user, signin_path }
 
       it { should have_title(user.name) }
       it { should have_link('Users',        href: users_path) }
@@ -56,12 +58,7 @@ describe "Authentication" do
       let(:user) { FactoryGirl.create(:user) }
 
       describe "when attempting to visit a protected page" do
-        before do
-          visit edit_user_path(user)
-          fill_in "Email",    with: user.email
-          fill_in "Password", with: user.password
-          click_button "Sign in"
-        end
+        before { sign_in user, edit_user_path(user) }
 
         describe "after signing in" do
 
@@ -93,7 +90,7 @@ describe "Authentication" do
     describe "as wrong user" do
       let(:user) { FactoryGirl.create(:user) }
       let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
-      before { sign_in user, no_capybara: true }
+      before { sign_in user, signin_path, no_capybara: true }
 
       describe "submitting a GET request to the Users#edit action" do
         before { get edit_user_path(wrong_user) }
@@ -111,7 +108,7 @@ describe "Authentication" do
       let(:user) { FactoryGirl.create(:user) }
       let(:non_admin) { FactoryGirl.create(:user) }
 
-      before { sign_in non_admin, no_capybara: true }
+      before { sign_in non_admin, signin_path, no_capybara: true }
 
       describe "submitting a DELETE request to the Users#destroy action" do
         before { delete user_path(user) }
