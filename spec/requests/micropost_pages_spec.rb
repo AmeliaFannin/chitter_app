@@ -4,11 +4,7 @@ describe "MicropostPages" do
   subject { page }
 
   let(:user) { FactoryGirl.create(:user) }
-  before { sign_in user }
-
-
-
-  
+  before { sign_in user }  
 # Creation ########################################################
 
   describe "micropost creation" do
@@ -29,15 +25,12 @@ describe "MicropostPages" do
     describe "with valid information" do
 
       before { fill_in 'micropost_content', with: "Lorem ipsum" }
+      
       it "should create a micropost" do
         expect { click_button "Post" }.to change(Micropost, :count).by(1)
       end
     end
   end
-
-
-
-
 # Destruction ####################################################################
 
   describe "micropost destruction" do
