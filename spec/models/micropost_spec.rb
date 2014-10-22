@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Micropost do
+<<<<<<< HEAD
 
   let(:user) { FactoryGirl.create(:user) }
   before { @micropost = user.microposts.build(content: "Useless Drivel") }
@@ -29,4 +30,7 @@ describe Micropost do
     before { @micropost.content = "a" * 141 }
     it { should_not be_valid }
   end  
+=======
+  pending "add some examples to (or delete) #{__FILE__}"
+>>>>>>> user-microposts
 end
