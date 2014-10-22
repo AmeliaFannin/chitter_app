@@ -9,4 +9,10 @@ FactoryGirl.define do
       admin true
     end
   end
+
+  factory :micropost do
+    content "Useless Drivel"
+    user
+  end
+
 end

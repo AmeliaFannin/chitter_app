@@ -72,7 +72,7 @@ p {
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid $grayLight;
   color: $grayMedium;
 }
 
@@ -157,6 +157,34 @@ input {
     &:last-child {
       border-bottom: 1px solid $grayLight;
     }
+  }
+}
+
+/* microposts */
+
+.microposts {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid $grayLight;
+  }
+}
+.content {
+  display: block;
+}
+.timestamp {
+  color: $grayMedium;
+}
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
   }
 }
 
